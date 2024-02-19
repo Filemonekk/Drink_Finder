@@ -1,17 +1,17 @@
-const search = document.querySelector('.search');
-const li = document.querySelectorAll('li');
+const input = document.querySelector('input')
+const liItems = document.querySelectorAll('li')
 
-const searchEngine = e => {
-    const text = e.target.value.toLowerCase();
+const filterList = () => {
+    liItems.forEach(item => {
+        const match = new RegExp(input.value, 'i').test(item.textContent)
 
-    li.forEach(el => {
-        if (el.textContent.toLocaleLowerCase().indexOf(text) !== -1) {
-            el.style.display = 'block'
+        if (!match) {
+            item.style.display = 'none'
         } else {
-            el.style.display = 'none'
+            item.style.display = 'block'
         }
     })
-};
+}
 
-search.addEventListener('keyup', searchEngine);
+input.addEventListener('keyup', filterList)
 
